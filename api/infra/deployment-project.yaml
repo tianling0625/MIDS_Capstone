@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: project
-  namespace: w255
+  namespace: twang0
   labels:
     app: project
 spec:
@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: project
-          image: cap-temp:latest
+          image: w255mids.azurecr.io/twang0/cap-temp:4484fcb
           env:
             - name: REDIS_URL
               value: redis://redis:6379
@@ -68,7 +68,7 @@ apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
   name: project
-  namespace: w255
+  namespace: twang0
 spec:
   scaleTargetRef:
     apiVersion: apps/v1

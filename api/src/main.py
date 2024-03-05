@@ -1,6 +1,10 @@
 import os
 import numpy as np
 from fastapi import FastAPI
+from fastapi.templating import Jinja2Templates
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
 from joblib import load
 from pydantic import BaseModel, ConfigDict, Field
 from typing import List
@@ -20,6 +24,18 @@ from sentence_transformers import SentenceTransformer
 
 
 app = FastAPI()
+
+app.mount("/static/", StaticFiles(directory="static"), name="static")
+templates = Jinja2Templates(directory="static")
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 class NeuralSearcher:
@@ -60,7 +76,7 @@ encoder = SentenceTransformer("all-mpnet-base-v2")
 
 async def startup_event():
     global model
-    model = load("model_pipeline.pkl")  # Load model
+    # model = load("model_pipeline.pkl")  # Load model
 
     # Set up the Redis cache backend
     redis_host = os.environ.get('REDIS_HOST', 'localhost')
@@ -141,6 +157,16 @@ def search_startup(q: str):
         "results": search_results
     }
 
+#Endpoints for index.html with template rendering
+@app.get("/", response_class=HTMLResponse)
+async def read_item(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
 
-# /docs endpoint is defined by FastAPI automatically
-# /openapi.json returns a json object automatically by FastAPI
+
+# Define a simple endpoint to handle questions
+@app.post("/submit_question")
+async def submit_question(question_text: str):
+    # Add your logic here to process the question (e.g., store in a database, send to another service, etc.)
+    # For simplicity, we'll just print the question text to the console
+    search_results = neural_searcher.search(question_text)
+    return {"answer": search_results[0]["answer"]}
