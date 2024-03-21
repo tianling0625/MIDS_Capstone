@@ -15,6 +15,8 @@ from starlette.responses import Response
 from fastapi_cache import FastAPICache
 from fastapi_cache.backends.redis import RedisBackend
 from fastapi_cache.decorator import cache
+from fastapi.responses import RedirectResponse
+
 
 from redis import asyncio as aioredis
 
@@ -36,7 +38,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 
 class NeuralSearcher:
 
@@ -144,12 +145,6 @@ async def health():
     return {"status": "healthy"}
 
 
-# # Raises 422 if bad parameter automatically by FastAPI
-# @app.get("/hello")
-# async def hello(name: str):
-#     return {"message": f"Hello {name}"}
-
-
 @app.get("/api")
 def search_startup(q: str):
     search_results = neural_searcher.search(q)
@@ -157,10 +152,14 @@ def search_startup(q: str):
         "results": search_results
     }
 
-#Endpoints for index.html with template rendering
-@app.get("/", response_class=HTMLResponse)
-async def read_item(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+@app.get("/")
+async def redirect_to_index():
+    return RedirectResponse(url="/static/index.html")
+
+# #Endpoints for index.html with template rendering
+# @app.get("/", response_class=HTMLResponse)
+# async def read_item(request: Request):
+#     return templates.TemplateResponse("index2.html", {"request": request})
 
 
 # Define a simple endpoint to handle questions
