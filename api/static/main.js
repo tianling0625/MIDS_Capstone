@@ -19,16 +19,12 @@ function submitQuestion() {
     console.log(question)
     const encodedQuestionText = encodeURIComponent(question);
     console.log(encodedQuestionText)
-    fetch(`http://172.212.25.19:8000/submit_question?question_text=${encodedQuestionText}`, {
+    fetch(`https://twang0.mids255.com/submit_question?question_text=${encodedQuestionText}`, {
         method: 'POST',
-        // headers: {
-        //     'Accept': 'application/json',
-        // },
-        // body: new URLSearchParams({ "question_text": question })
         headers: {
-            'Content-Type': 'application/json', // Adjust the content type based on your API
-          },
-          body: JSON.stringify({ text: question }) // Convert the data to JSON format if needed
+            'Accept': 'application/json',
+        },
+        body: new URLSearchParams({ "question_text": question })
     })
     .then(response => response.json())
     .then(data => {

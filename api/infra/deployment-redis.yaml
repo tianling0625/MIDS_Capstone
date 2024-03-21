@@ -20,9 +20,12 @@ spec:
         - name: redis
           image: redis:7.2
           resources:
+            limits:
+              cpu: '2'
+              memory: 1Gi
             requests:
-              cpu: 200m
-              memory: 1000Mi
+              cpu: 100m
+              memory: 128Mi
           command: ["redis-server"]
           args: ["/etc/redis.conf"]
           env:
@@ -43,6 +46,13 @@ spec:
       initContainers:
         - name: config
           image: redis:7.2
+          resources:
+            limits:
+              cpu: '2'
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 128Mi
           command: ["bash", "-c"]
           args:
             - cp /mnt/config-map/master.conf /etc/redis.conf
