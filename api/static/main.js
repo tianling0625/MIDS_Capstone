@@ -21,6 +21,7 @@ function submitQuestion() {
     console.log(encodedQuestionText)
 
     let baseUrl = window.location.href.includes("https://twang0.mids255.com") ? "https://twang0.mids255.com" : "http://localhost:8000";
+    console.log("Base URL:", baseUrl);
     let requestUrl = `${baseUrl}/submit_question?question_text=${encodedQuestionText}`;
     
     fetch(requestUrl, {
