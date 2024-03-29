@@ -19,7 +19,11 @@ function submitQuestion() {
     console.log(question)
     const encodedQuestionText = encodeURIComponent(question);
     console.log(encodedQuestionText)
-    fetch(`https://twang0.mids255.com/submit_question?question_text=${encodedQuestionText}`, {
+
+    let baseUrl = window.location.href.includes("https://twang0.mids255.com") ? "https://twang0.mids255.com" : "http://localhost:8000";
+    let requestUrl = `http://localhost:8000/submit_question?question_text=${encodedQuestionText}`;
+    
+    fetch(requestUrl, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
