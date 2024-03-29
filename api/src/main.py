@@ -176,4 +176,4 @@ async def submit_question(question_text: str):
     # For simplicity, we'll just print the question text to the console
     search_results = neural_searcher.search(question_text)
     complete_answer = "What is " + search_results[0]["answer"]
-    return {"answer": complete_answer}
+    return {"answer": complete_answer} 
