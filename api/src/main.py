@@ -22,6 +22,7 @@ from redis import asyncio as aioredis
 
 from qdrant_client import QdrantClient
 from sentence_transformers import SentenceTransformer
+from transformers import T5Tokenizer, TFT5ForConditionalGeneration
 
 
 app = FastAPI()
@@ -59,7 +60,7 @@ class NeuralSearcher:
             collection_name=self.collection_name,
             query_vector=vector,
             query_filter=None,  # We don't want any filters for now
-            limit=3,  # 5 the most closest results is enough
+            limit=10,  # 5 the most closest results is enough
         )
         # `search_result` contains found vector ids with similarity scores along with the stored payload
         # In this function we are interested in payload only
@@ -74,6 +75,31 @@ class NeuralSearcher:
             for hit in search_result
         ]
         return payloads_with_scores
+    
+    def RAG_search(self, text: str):
+        #importing the model - Flan-T5 base
+        t5_model = TFT5ForConditionalGeneration.from_pretrained('google/flan-t5-base')
+        t5_tokenizer = T5Tokenizer.from_pretrained('google/flan-t5-base')
+
+        #creating the context
+        hits = self.qdrant_client.search(
+            collection_name=self.collection_name,
+            query_vector=self.model.encode(text).tolist(),
+            query_filter=None,
+            limit=10,)
+        context = ""
+        for hit in hits:
+            context += hit.payload['sentence'] + ". "
+        #using FLAN-T5 + adding the context
+        
+        t5_context_text = context
+        t5_question_text = text
+        t5_qa_input_text = 'Answer the question: ' + t5_question_text + '?' + t5_context_text
+        t5_inputs = t5_tokenizer([t5_qa_input_text], truncation = True, return_tensors='tf')
+        t5_summary_ids = t5_model.generate(t5_inputs['input_ids'])
+        prediction = [t5_tokenizer.decode(g, skip_special_tokens=True, clean_up_tokenization_spaces=False) for g in t5_summary_ids]
+        prediction = str(prediction[0])
+        return prediction
 
 
 # Create an instance of the neural searcher
@@ -96,56 +122,6 @@ async def startup_event():
 app.router.add_event_handler("startup", startup_event)
 
 
-# # Use pydantic.Extra.forbid to only except exact field set from client.
-# # This was not required by the lab.
-# # Your test should handle the equivalent whenever extra fields are sent.
-# class House(BaseModel):
-#     """Data model to parse the request body JSON."""
-
-#     model_config = ConfigDict(extra="forbid")
-
-#     MedInc: float = Field(gt=0)
-#     HouseAge: float
-#     AveRooms: float
-#     AveBedrms: float
-#     Population: float
-#     AveOccup: float
-#     Latitude: float
-#     Longitude: float
-
-#     def to_np(self):
-#         return np.array(list(vars(self).values())).reshape(1, 8)
-
-
-# class HousePrediction(BaseModel):
-#     model_config = ConfigDict(extra="forbid")
-#     prediction: float
-
-# # New BulkHouseRequest for accepting a list of House inputs
-# class BulkHouse(BaseModel):
-#     houses: List[House]
-#     def to_np(self):
-#         return np.array([house.to_np().flatten() for house in self.houses])
-
-# # New response model for bulk predictions
-# class BulkHousePrediction(BaseModel):
-#     predictions: List[float]
-
-# @app.post("/predict", response_model=HousePrediction)
-# # @cache(expire=60)  # Cache for 60 seconds
-# async def predict(house: House):
-#     prediction = model.predict(house.to_np())[0]
-#     return {"prediction": prediction}
-
-
-# # New endpoint for bulk predictions
-# @app.post("/bulk_predict", response_model=BulkHousePrediction)
-# @cache(expire=60)  # Cache for 60 seconds
-# async def bulk_predict(houses: BulkHouse):
-#     predictions = model.predict(houses.to_np())
-#     return {"predictions": predictions.tolist()}
-#     # return BulkHousePrediction(predictions=predictions.tolist())
-
 
 @app.get("/health")
 async def health():
@@ -163,17 +139,18 @@ async def redirect_to_index():
     return RedirectResponse(url="/static/index.html")
 
 
-# #Endpoints for index.html with template rendering
-# @app.get("/", response_class=HTMLResponse)
-# async def read_item(request: Request):
-#     return templates.TemplateResponse("index2.html", {"request": request})
+# @app.post("/submit_question")
+# async def submit_question(question_text: str):
+#     # Add your logic here to process the question (e.g., store in a database, send to another service, etc.)
+#     # For simplicity, we'll just print the question text to the console
+#     search_results = neural_searcher.search(question_text)
+#     complete_answer = "What is " + search_results[0]["answer"] + "?"
+#     return {"answer": complete_answer} 
 
-
-# Define a simple endpoint to handle questions
 @app.post("/submit_question")
 async def submit_question(question_text: str):
     # Add your logic here to process the question (e.g., store in a database, send to another service, etc.)
     # For simplicity, we'll just print the question text to the console
-    search_results = neural_searcher.search(question_text)
-    complete_answer = "What is " + search_results[0]["answer"]
+    search_results = neural_searcher.RAG_search(question_text)
+    complete_answer = "What is " + search_results + "?"
     return {"answer": complete_answer} 
