@@ -199,6 +199,42 @@ tests-mypy = ["mypy (>=1.6)", "pytest-mypy-plugins"]
 tests-no-zope = ["attrs[tests-mypy]", "cloudpickle", "hypothesis", "pympler", "pytest (>=4.3.0)", "pytest-xdist[psutil]"]
 
 [[package]]
+name = "azure-core"
+version = "1.30.1"
+description = "Microsoft Azure Core Library for Python"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "azure-core-1.30.1.tar.gz", hash = "sha256:26273a254131f84269e8ea4464f3560c731f29c0c1f69ac99010845f239c1a8f"},
+    {file = "azure_core-1.30.1-py3-none-any.whl", hash = "sha256:7c5ee397e48f281ec4dd773d67a0a47a0962ed6fa833036057f9ea067f688e74"},
+]
+
+[package.dependencies]
+requests = ">=2.21.0"
+six = ">=1.11.0"
+typing-extensions = ">=4.6.0"
+
+[package.extras]
+aio = ["aiohttp (>=3.0)"]
+
+[[package]]
+name = "azure-data-tables"
+version = "12.5.0"
+description = "Microsoft Azure Azure Data Tables Client Library for Python"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "azure-data-tables-12.5.0.tar.gz", hash = "sha256:eea393a6380c42eb03e807825c037832003d09c823294831da15e81155a0b4e6"},
+    {file = "azure_data_tables-12.5.0-py3-none-any.whl", hash = "sha256:fa45330f45c0d7a45db353c196cb4265bdf03fb1de9e1e726c30b8dd5ea55e5d"},
+]
+
+[package.dependencies]
+azure-core = ">=1.29.4,<2.0.0"
+isodate = ">=0.6.1,<1.0.0"
+typing-extensions = ">=4.3.0"
+yarl = ">=1.0,<2.0"
+
+[[package]]
 name = "black"
 version = "23.12.1"
 description = "The uncompromising code formatter."
@@ -1064,6 +1100,20 @@ files = [
     {file = "iniconfig-2.0.0-py3-none-any.whl", hash = "sha256:b6a85871a79d2e3b22d2d1b94ac2824226a63c6b741c88f7ae975f18b6778374"},
     {file = "iniconfig-2.0.0.tar.gz", hash = "sha256:2d91e135bf72d31a410b17c16da610a82cb55f6b0477d1a902134b24a455b8b3"},
 ]
+
+[[package]]
+name = "isodate"
+version = "0.6.1"
+description = "An ISO 8601 date/time/duration parser and formatter"
+optional = false
+python-versions = "*"
+files = [
+    {file = "isodate-0.6.1-py2.py3-none-any.whl", hash = "sha256:0751eece944162659049d35f4f549ed815792b38793f07cf73381c1c87cbed96"},
+    {file = "isodate-0.6.1.tar.gz", hash = "sha256:48c5881de7e8b0a0d648cb024c8062dc84e7b840ed81e864c7614fd3c127bde9"},
+]
+
+[package.dependencies]
+six = "*"
 
 [[package]]
 name = "jinja2"
@@ -3027,6 +3077,16 @@ files = [
 ]
 
 [[package]]
+name = "timedelta"
+version = "2020.12.3"
+description = "datetime.timedelta replacement"
+optional = false
+python-versions = "*"
+files = [
+    {file = "timedelta-2020.12.3.tar.gz", hash = "sha256:41c28b314de9cb6e4c95fcc9f4e3ecee435f2fc821a079cd9243be4783ac4cf4"},
+]
+
+[[package]]
 name = "tokenizers"
 version = "0.15.2"
 description = ""
@@ -3731,4 +3791,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.11"
-content-hash = "760cd2d6e1a0763914c7f6d6f8584bbaf3712fcd0371d390324fd08c377952b4"
+content-hash = "141212e56e57fa50c66f601e407b3d877553521c5274dd734f60951c4403f377"

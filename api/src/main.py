@@ -1,4 +1,6 @@
 import os
+import timedelta
+from datetime import datetime 
 import numpy as np
 from fastapi import FastAPI
 from fastapi.templating import Jinja2Templates
@@ -23,7 +25,12 @@ from redis import asyncio as aioredis
 from qdrant_client import QdrantClient
 from sentence_transformers import SentenceTransformer
 from transformers import T5Tokenizer, TFT5ForConditionalGeneration
+from azure.data.tables import TableServiceClient
 
+
+connection_string = os.environ.get("SECRET_KEY")
+table_name = "history"
+table_client = TableServiceClient.from_connection_string(conn_str=connection_string).get_table_client(table_name=table_name)
 
 app = FastAPI()
 
@@ -153,4 +160,30 @@ async def submit_question(question_text: str):
     # For simplicity, we'll just print the question text to the console
     search_results = neural_searcher.RAG_search(question_text)
     complete_answer = "What is " + search_results + "?"
+
+    future_time = datetime(2040, 1, 1)
+    current_time = datetime.utcnow()
+
+    delta = future_time - current_time
+    decreasing_timestamp = int(delta.total_seconds())
+    row_key = str(decreasing_timestamp)
+    user_history = {
+    "PartitionKey": "Questions",  # 所有问题都存储在同一个分区
+    "RowKey": row_key,  # 使用时间戳作为唯一标识符
+    "Question": question_text,
+    "Answer": complete_answer}
+    table_client.upsert_entity(entity=user_history)
+
     return {"answer": complete_answer} 
+
+@app.get("/latest-questions/", response_model=List[dict])
+def get_latest_questions():
+    partition_key = "Questions"
+    query_filter = f"PartitionKey eq '{partition_key}'"
+    entities = list(table_client.query_entities(query_filter))  # 转换为列表以便处理
+
+    sorted_entities = sorted(entities, key=lambda x: x['RowKey'], reverse=True)
+
+    latest_entities = sorted_entities[:3]
+
+    return [dict(entity) for entity in latest_entities]
