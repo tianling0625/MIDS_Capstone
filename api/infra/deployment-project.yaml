@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: project
-          image: w255mids.azurecr.io/twang0/cap-temp:fa6017a
+          image: w255mids.azurecr.io/twang0/cap-temp:af547e6
           env:
             - name: REDIS_URL
               value: redis://redis:6379
@@ -27,8 +27,8 @@ spec:
               cpu: 400m
               memory: 1000Mi
             limits:
-              cpu: 1000m
-              memory: 2000Mi
+              cpu: 2000m
+              memory: 5000Mi
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000
@@ -37,15 +37,15 @@ spec:
               scheme: HTTP
               path: /health
               port: 8000
-            initialDelaySeconds: 5
-            periodSeconds: 5
+            initialDelaySeconds: 30
+            periodSeconds: 30
           livenessProbe:
             httpGet:
               scheme: HTTP
               path: /health
               port: 8000
-            initialDelaySeconds: 15
-            periodSeconds: 20
+            initialDelaySeconds: 30
+            periodSeconds: 30
       initContainers:
         - name: init-verify-redis-service-dns
           image: busybox
