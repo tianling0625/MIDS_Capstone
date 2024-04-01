@@ -182,7 +182,7 @@ def get_latest_questions():
     query_filter = f"PartitionKey eq '{partition_key}'"
     entities = list(table_client.query_entities(query_filter))  # 转换为列表以便处理
 
-    sorted_entities = sorted(entities, key=lambda x: x['RowKey'], reverse=True)
+    sorted_entities = sorted(entities, key=lambda x: x['Timestamp'], reverse=True)
 
     latest_entities = sorted_entities[:3]
 
