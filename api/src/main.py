@@ -180,9 +180,9 @@ async def submit_question(question_text: str):
 def get_latest_questions():
     partition_key = "Questions"
     query_filter = f"PartitionKey eq '{partition_key}'"
-    entities = list(table_client.query_entities(query_filter))  # 转换为列表以便处理
+    entities = list(table_client.query_entities(query_filter,results_per_page=3))  # 转换为列表以便处理
 
-    sorted_entities = sorted(entities, key=lambda x: x['Timestamp'], reverse=True)
+    sorted_entities = sorted(entities, key=lambda x: x['RowKey'])
 
     latest_entities = sorted_entities[:3]
 
