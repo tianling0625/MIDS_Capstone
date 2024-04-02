@@ -3,14 +3,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap Tutorial Sample Page</title>
+    <title>JeopardyLLM Page</title>
     <link rel="stylesheet" href="bootstrap-4.5.3-dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 </head>
 <body>
     
     <nav class="navbar navbar-expand-md">
-        <a class="navbar-brand" href="#"><img src="images/jeopardyLLM-logos_transparent.png" alt="JeopardyLLM Logo" style="height: 60px;"> JeopardyLLM</a>
+        <a class="navbar-brand" href="#"><img src="images/jeopardyllm-high-resolution-logo-transparent.png" alt="JeopardyLLM Logo" style="height: 60px;"></a>
         <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -18,6 +19,9 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Research</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="about.html">About</a>
@@ -31,36 +35,54 @@
     
     <header class="page-header header container-fluid">
         <div class="description">
-            <h1>Welcome to JeopardyLLM! Where the trivia quest begins...</h1>
-            <p>Come and ask any question and our JeopardyLLM will give you an answer</p>
-            <button class="btn btn-outline-secondary btn-lg">Let's Trivia!</button>
+            <h1 class="description-title">Welcome to JeopardyLLM!<br><span class="smaller-text">...where the trivia quest begins...</span></h1>
+            <p class="description-text">Type in your answer and our JeopardyLLM will give you the question</p>
             
             <div class="container features">
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-12">
-                        <!-- Optional: Additional content or empty for spacing -->
+                        <h3 class="feature-title">Recently Asked Questions</h3>
+                        <ul id="recent-questions">
+                            <!-- JavaScript will be used to dynamically add list items here -->
+                        </ul>
                     </div>
-                    
-                    <div class="col-lg-4 col-md-4 col-sm-12">
-                        <h3 class="feature-title">The Answer is:</h3>
-                        <p></p>
-                        <div id="llm-answer" class="alert alert-secondary" role="alert" style="display:none;"></div>
-                        <form id="question-form" method="POST"> <!-- Removed 'action' attribute for clarity -->
+                    <div class="col-lg-4 col-md-4 col-sm-12 input-section">
+                        <h3 class="feature-title">Your Input</h3>
+                        <form id="question-form" method="POST"> 
                             <div class="form-group">
-                                <textarea class="form-control" rows="4" placeholder="Your Question" name="question"></textarea>
+                                <textarea class="form-control" rows="4" placeholder="Type here" name="question"></textarea>
                             </div>
-                            <input type="submit" class="btn btn-secondary btn-block" value="Submit Question">
+                            <input type="submit" class="btn btn-secondary btn-block" value="Click to submit">
+                            <h3 class="feature-title">Response</h3>
+                            <div id="llm-answer" class="alert alert-secondary" role="alert" style="display:none;"></div>
+                            <button id="learn-more-btn" class="btn btn-outline-secondary btn-lg mt-2">Want to learn more?</button> 
                         </form>
-                    </div>
-                    
-                    <div class="col-lg-4 col-md-4 col-sm-12">
-                        <!-- Optional: Additional content or empty for spacing -->
                     </div>
                 </div>
             </div>
         </div>
     </header>
     
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <h3 class="feature-title">Read Me</h3>
+                <ul class="fixed-size-paragraph">
+                    <li>This website is built for trivia enthusiasts and knowledge seekers alike.</li>
+                    <li>Submit your "answer" and receive a "Jeopardy" style question to have some "Jeopardy" style fun!!</li>
+                </ul>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <h3 class="feature-title">Disclaimer</h3>
+                <ul class="fixed-size-paragraph">
+                    <li>This website is only built for academic purposes and is not intended for commercial use.</li>
+                    <li>We have achieved 40% accuracy on the LLM powering the website, therefore 3 out of 5 responses may be incorrect.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+
     <script src="jquery-3.7.1.min.js"></script>
     <script src="bootstrap-4.5.3-dist/js/bootstrap.min.js"></script>
     <script src="main.js"></script>

@@ -1,10 +1,10 @@
 body {
     padding: 0;
     margin: 0;
-    background: #F4F2F1;
+    background: #FFFFFF;
 }
 .navbar {
-    background:blue;
+    background: #156082;
 }
 .nav-link,
 .navbar-brand {
@@ -21,7 +21,7 @@ body {
     justify-content: flex-end;
 }
 .header {
-    background-image: url('images/jl.jpg');
+    background-image: url('images/header.jpg');
     background-size: cover;
     background-position: center;
     position: relative;
@@ -35,46 +35,121 @@ body {
     background: rgba(0, 0, 0, 0.6);
 }
 .description {
-	left: 50%;
-	position: absolute;
-	top: 45%;
-	transform: translate(-50%, -55%);
-	text-align: center;
+    left: 50%;
+    position: absolute;
+    top: 45%;
+    transform: translate(-50%, -55%);
+    text-align: center;
+    margin-top: 200px; /* Adjust the value as needed to avoid overlap */
 }
 .description h1 {
-	color: #1D405C;
+    color: #1D405C;
+    font-family: 'Helvetica', sans-serif;
+    font-size: 2rem; /* Default font size for larger screens */
 }
 .description p {
-	color: black;
-	font-size: 1.3rem;
-	line-height: 1.5;
+    color: black;
+    font-size: 1.3rem;
+    line-height: 1.5;
+    font-family: 'Helvetica', sans-serif;
 }
 .description button, input[type="submit"] {
-    border:1px solid #1D405C;
-    background:#1D405C;
+    border: 1px solid #1D405C;
+    background: #156082;
     border-radius: 0;
-    color:#fff;
+    color: #fff;
 }
 .description button:hover {
-	border:1px solid #fff;
-    background:#fff;
-    color:#000;
+    border: 1px solid #fff;
+    background: #fff;
+    color: #000;
 }
 .features {
-	margin: 4em auto;
-	padding: 1em;
-	position: relative;
+    margin: 4em auto;
+    padding: 1em;
+    position: relative;
 }
 .feature-title {
-	color: #333;
-	font-size: 1.3rem;
-	font-weight: 700;
-	margin-bottom: 20px;
-	text-transform: uppercase;
+    color: #156082;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    text-transform: uppercase;
 }
 .features img {
-	-webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
-	-moz-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
-	box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
-	margin-bottom: 16px;
+    -webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    margin-bottom: 16px;
+}
+
+.description-title {
+    color: #156082;
+    font-family: 'Helvetica', sans-serif;
+    font-weight: 700;
+    font-size: 2rem; /* Default font size for larger screens */
+    margin-top: 20px; /* Adjust the value as needed */
+}
+
+.smaller-text {
+    color: #1D405C;
+    font-family: 'Helvetica', sans-serif;
+    font-size: 0.6em; /* Adjust the value as needed */
+}
+
+.description-text {
+    color: black;
+    font-size: 1.3rem;
+    line-height: 1.5;
+    font-family: 'Helvetica', sans-serif;
+    margin-top: 10px; /* Adjust the value as needed */
+}
+
+.fixed-size-paragraph {
+    max-width: 500px; /* Adjust the max-width as needed */
+    font-family: Helvetica, sans-serif; /* Example font family */
+    font-size: 1.5rem; /* Example font size */
+    text-align: left; /* Aligns text to the left */
+    margin-bottom: 50px;
+    line-height: 1.5; /* Increased line spacing for better readability */
+    padding: 10px; /* Padding around the text */
+}
+
+.read-me-section {
+    margin-top: 50px; /* Adjust the value as needed */
+    margin-right: 20px; /* Add space to the right */
+}
+
+.input-section {
+    margin-top: 50px; /* Adjust the value as needed */
+}
+
+.form-group .form-control {
+    background-color: #d1d1d1; /* Light blue background */
+    color: black;
+    border-color: #ced4da; /* Blue border */
+}
+
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .description-title {
+        font-size: 1.5rem; /* Smaller font size for smaller screens */
+    }
+
+    .description-text {
+        font-size: 1rem; /* Smaller font size for smaller screens */
+    }
+
+    .fixed-size-paragraph {
+        font-size: 1rem; /* Adjusted font size for smaller screens */
+        max-width: 500px; /* Adjusted max-width for smaller screens */
+    }
+}
+
+@media (min-width: 768px) { /* Adjusts the layout for medium to large screens */
+    .col-lg-4.col-md-4.col-sm-12 {
+        margin-right: 50px; /* Adjust the value as needed */
+    }
 }
