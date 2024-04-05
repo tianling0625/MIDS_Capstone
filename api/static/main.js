@@ -4,7 +4,7 @@ var ready = (callback) => {
 }
 
 ready(() => {
-    document.querySelector(".header").style.height = window.innerHeight + "px";
+    document.querySelector(".header").style.height = (window.innerHeight * 0.45) + "px";
     fetchLatestQuestions();
 });
 
@@ -17,13 +17,13 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function submitQuestion() {
-
     var question = document.querySelector('[name="question"]').value;
-    console.log(question)
+    console.log(question);
     const encodedQuestionText = encodeURIComponent(question);
-    console.log(encodedQuestionText)
+    console.log(encodedQuestionText);
 
-    let baseUrl = window.location.href.includes("https://twang0.mids255.com") ? "https://twang0.mids255.com" : "http://localhost:8000";
+    //let baseUrl = window.location.href.includes("https://twang0.mids255.com/") ? "https://twang0.mids255.com/" : "http://localhost:8000/";
+    let baseUrl = "https://twang0.mids255.com";
     console.log("Base URL:", baseUrl);
     let requestUrl = `${baseUrl}/submit_question?question_text=${encodedQuestionText}`;
     let latestQuestionUrl = `${baseUrl}/latest-questions`;
@@ -60,7 +60,7 @@ function addQuestionToList(question) {
 
 // Function to fetch and display the latest questions
 function fetchLatestQuestions() {
-    fetch(latestQuestionUrl)
+    fetch('https://twang0.mids255.com/latest-questions/')
     .then(response => response.json())
     .then(data => {
         var recentQuestionsList = document.getElementById('recent-questions');

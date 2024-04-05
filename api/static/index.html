@@ -37,42 +37,42 @@
         <div class="description">
             <h1 class="description-title">Welcome to JeopardyLLM!<br><span class="smaller-text">...where the trivia quest begins...</span></h1>
             <p class="description-text">Type in your answer and our JeopardyLLM will give you the question</p>
-            
-            <div class="container features">
-                <div class="row">
-                    <div class="col-lg-4 col-md-4 col-sm-12">
-                        <h3 class="feature-title">Recently Asked Questions</h3>
-                        <ul id="recent-questions">
-                            <!-- JavaScript will be used to dynamically add list items here -->
-                        </ul>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-12 input-section">
-                        <h3 class="feature-title">Your Input</h3>
-                        <form id="question-form" method="POST"> 
-                            <div class="form-group">
-                                <textarea class="form-control" rows="4" placeholder="Type here" name="question"></textarea>
-                            </div>
-                            <input type="submit" class="btn btn-secondary btn-block" value="Click to submit">
-                            <h3 class="feature-title">Response</h3>
-                            <div id="llm-answer" class="alert alert-secondary" role="alert" style="display:none;"></div>
-                            <button id="learn-more-btn" class="btn btn-outline-secondary btn-lg mt-2">Want to learn more?</button> 
-                        </form>
-                    </div>
-                </div>
-            </div>
         </div>
     </header>
     
+    <div class="container features">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12 order-lg-1 order-md-1 order-3">
+                <h3 class="feature-title">Recently Asked Questions</h3>
+                <ul id="recent-questions">
+                    <!-- JavaScript will be used to dynamically add list items here -->
+                </ul>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 input-section order-lg-2 order-md-2 order-1">
+                <h3 class="feature-title">Your Input</h3>
+                <form id="question-form" method="POST"> 
+                    <div class="form-group">
+                        <textarea class="form-control" rows="4" placeholder="Type here" name="question"></textarea>
+                    </div>
+                    <input type="submit" class="btn btn-secondary btn-block" value="Click to submit">
+                    <h3 class="feature-title">Response</h3>
+                    <div id="llm-answer" class="alert alert-secondary" role="alert" style="display:none;"></div>
+                    <button id="learn-more-btn" class="btn btn-outline-secondary btn-lg mt-2">Want to learn more?</button> 
+                </form>
+            </div>
+        </div>
+    </div>
+    
     <div class="container">
         <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="col-lg-6 col-md-6 col-sm-12 order-lg-3 order-md-3 order-2">
                 <h3 class="feature-title">Read Me</h3>
                 <ul class="fixed-size-paragraph">
                     <li>This website is built for trivia enthusiasts and knowledge seekers alike.</li>
                     <li>Submit your "answer" and receive a "Jeopardy" style question to have some "Jeopardy" style fun!!</li>
                 </ul>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="col-lg-6 col-md-6 col-sm-12 order-lg-4 order-md-4 order-4">
                 <h3 class="feature-title">Disclaimer</h3>
                 <ul class="fixed-size-paragraph">
                     <li>This website is only built for academic purposes and is not intended for commercial use.</li>

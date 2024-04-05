@@ -26,6 +26,9 @@ body {
     background-position: center;
     position: relative;
 }
+.page-header {
+    height: 10vh; /* 75% of the viewport height */
+}
 .overlay {
     position: absolute;
     min-height: 100%;
@@ -40,7 +43,7 @@ body {
     top: 45%;
     transform: translate(-50%, -55%);
     text-align: center;
-    margin-top: 200px; /* Adjust the value as needed to avoid overlap */
+    margin-top: 0px; /* Adjusted top margin */
 }
 .description h1 {
     color: #1D405C;
@@ -65,7 +68,7 @@ body {
     color: #000;
 }
 .features {
-    margin: 4em auto;
+    margin: 1em auto;
     padding: 1em;
     position: relative;
 }
@@ -89,7 +92,7 @@ body {
     font-family: 'Helvetica', sans-serif;
     font-weight: 700;
     font-size: 2rem; /* Default font size for larger screens */
-    margin-top: 20px; /* Adjust the value as needed */
+    margin-top: 10px; /* Adjust the value as needed */
 }
 
 .smaller-text {
@@ -111,18 +114,20 @@ body {
     font-family: Helvetica, sans-serif; /* Example font family */
     font-size: 1.5rem; /* Example font size */
     text-align: left; /* Aligns text to the left */
-    margin-bottom: 50px;
+    margin-bottom: 80px;
     line-height: 1.5; /* Increased line spacing for better readability */
     padding: 10px; /* Padding around the text */
 }
 
 .read-me-section {
     margin-top: 50px; /* Adjust the value as needed */
-    margin-right: 20px; /* Add space to the right */
+    margin-bottom: 20px; /* Adjusted bottom margin for smaller screens */
+    width: 100%; /* Ensure full width */
 }
 
 .input-section {
-    margin-top: 50px; /* Adjust the value as needed */
+    margin-top: 80px; /* Adjust top margin to position correctly below Read Me */
+    width: 100%; /* Ensure full width */
 }
 
 .form-group .form-control {
@@ -131,11 +136,22 @@ body {
     border-color: #ced4da; /* Blue border */
 }
 
+.btn-outline-secondary {
+    border-color: #156082; /* Same as submit button */
+    background-color: #156082; /* Same as submit button */
+    color: #fff; /* White text */
+}
+
+.btn-outline-secondary:hover {
+    border-color: #fff; /* White border on hover */
+    background-color: #fff; /* White background on hover */
+    color: #156082; /* Blue text on hover */
+}
 
 /* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
     .description-title {
-        font-size: 1.5rem; /* Smaller font size for smaller screens */
+        font-size: 1.2rem; /* Smaller font size for smaller screens */
     }
 
     .description-text {
@@ -144,7 +160,27 @@ body {
 
     .fixed-size-paragraph {
         font-size: 1rem; /* Adjusted font size for smaller screens */
-        max-width: 500px; /* Adjusted max-width for smaller screens */
+        max-width: 100%; /* Adjusted max-width for smaller screens */
+        margin-bottom: 30px; /* Adjusted bottom margin for smaller screens */
+        padding: 10px; /* Adjusted padding for smaller screens */
+    }
+
+    .read-me-section {
+        margin-top: 30px; /* Adjusted top margin for smaller screens */
+        margin-bottom: 20px; /* Adjusted bottom margin for smaller screens */
+    }
+
+    .input-section {
+        margin-top: 20px; /* Adjusted top margin for smaller screens */
+    }
+
+    .features, .container {
+        margin: 1em auto; /* Reduced margin for smaller screens */
+        padding: 0; /* Reduced padding for smaller screens */
+    }
+
+    .description {
+        margin-top: 50px; /* Reduced top margin for smaller screens */
     }
 }
 
