@@ -148,6 +148,13 @@ body {
     color: #156082; /* Blue text on hover */
 }
 
+.card-img-top {
+    width: 150px; /* Adjust the width as needed */
+    height: 150px; /* Adjust the height as needed */
+    object-fit: cover; /* Ensures the image covers the area without stretching */
+    border-radius: 50%; /* Keeps the image round */
+}
+
 /* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
     .description-title {

@@ -21,7 +21,7 @@
                     <a class="nav-link" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Research</a>
+                    <a class="nav-link" href="research.html">Research</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="about.html">About</a>
@@ -52,8 +52,13 @@
                 <h3 class="feature-title">Your Input</h3>
                 <form id="question-form" method="POST"> 
                     <div class="form-group">
-                        <textarea class="form-control" rows="4" placeholder="Type here" name="question"></textarea>
+                        <textarea class="form-control" rows="4" placeholder="example: tallest mountain in the solar system" name="question"></textarea>
                     </div>
+                    
+                    <div id="loading-spinner" class="spinner-border text-primary" role="status" style="display: none;">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+
                     <input type="submit" class="btn btn-secondary btn-block" value="Click to submit">
                     <h3 class="feature-title">Response</h3>
                     <div id="llm-answer" class="alert alert-secondary" role="alert" style="display:none;"></div>

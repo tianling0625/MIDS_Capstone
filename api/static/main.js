@@ -18,15 +18,20 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function submitQuestion() {
     var question = document.querySelector('[name="question"]').value;
-    console.log(question);
-    const encodedQuestionText = encodeURIComponent(question);
-    console.log(encodedQuestionText);
+    var submitButton = document.querySelector('input[type="submit"]');
+    var spinner = document.getElementById('loading-spinner');
+    
+    // Check if the input is empty
+    if (!question.trim()) {
+        submitButton.blur(); // Remove focus from the submit button
+        return; // Do nothing if the input is empty
+    }
+    
+    spinner.style.display = 'block'; // Show the spinner
 
-    //let baseUrl = window.location.href.includes("https://twang0.mids255.com/") ? "https://twang0.mids255.com/" : "http://localhost:8000/";
+    const encodedQuestionText = encodeURIComponent(question);
     let baseUrl = "https://twang0.mids255.com";
-    console.log("Base URL:", baseUrl);
     let requestUrl = `${baseUrl}/submit_question?question_text=${encodedQuestionText}`;
-    let latestQuestionUrl = `${baseUrl}/latest-questions`;
 
     fetch(requestUrl, {
         method: 'POST',
@@ -41,9 +46,11 @@ function submitQuestion() {
         document.getElementById('llm-answer').textContent = data.answer;
         addQuestionToList(question);
         fetchLatestQuestions();
+        spinner.style.display = 'none'; // Hide the spinner
     })
     .catch((error) => {
         console.error('Error:', error);
+        spinner.style.display = 'none'; // Hide the spinner
     });
 }
 

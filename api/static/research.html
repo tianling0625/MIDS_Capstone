@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Research - JeopardyLLM</title>
+		<link rel="stylesheet" href="bootstrap-4.5.3-dist/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+		
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="utf-8" />
+		<title>
+		</title>
+		<style>
+			body { line-height:115%; font-family:Arial; font-size:11pt }
+			h1, h2, h3, h4, h5, h6, p { margin:0pt }
+			li, table { margin-top:0pt; margin-bottom:0pt }
+			h1 { margin-top:20pt; margin-bottom:6pt; page-break-before:auto; page-break-inside:avoid; page-break-after:avoid; line-height:115%; font-family:Arial; font-size:20pt; font-weight:normal; color:#000000 }
+			h2 { margin-top:18pt; margin-bottom:6pt; page-break-before:auto; page-break-inside:avoid; page-break-after:avoid; line-height:115%; font-family:Arial; font-size:16pt; font-weight:normal; color:#000000 }
+			h3 { margin-top:16pt; margin-bottom:4pt; page-break-before:auto; page-break-inside:avoid; page-break-after:avoid; line-height:115%; font-family:Arial; font-size:14pt; font-weight:normal; color:#434343 }
+			h4 { margin-top:14pt; margin-bottom:4pt; page-break-before:auto; page-break-inside:avoid; page-break-after:avoid; line-height:115%; font-family:Arial; font-size:12pt; font-weight:normal; font-style:normal; color:#666666 }
+			h5 { margin-top:12pt; margin-bottom:4pt; page-break-before:auto; page-break-inside:avoid; page-break-after:avoid; line-height:115%; font-family:Arial; font-size:11pt; font-weight:normal; color:#666666 }
+			h6 { margin-top:12pt; margin-bottom:4pt; page-break-before:auto; page-break-inside:avoid; page-break-after:avoid; line-height:115%; font-family:Arial; font-size:11pt; font-weight:normal; font-style:italic; color:#666666 }
+			.Subtitle { margin-top:0pt; margin-bottom:16pt; page-break-before:auto; page-break-inside:avoid; page-break-after:avoid; line-height:115%; font-family:Arial; font-size:15pt; font-style:normal; color:#666666 }
+			.Title { margin-top:0pt; margin-bottom:3pt; page-break-before:auto; page-break-inside:avoid; page-break-after:avoid; line-height:115%; font-size:26pt }
+			.normal0 { line-height:115%; font-size:11pt }
+		</style>
+	</head>
+	<body>
+		<!-- Navigation bar, similar to index.html -->
+		<nav class="navbar navbar-expand-md">
+			<!-- Navbar content -->
+		</nav>
+	
+		<!-- Back to Home Button -->
+		<div class="container my-3">
+			<a href="index.html" class="btn btn-primary">Back to Home</a>
+		</div>
+
+		<div>
+			<p class="normal0">
+				Title: JeopardyLLM: Adventures in Retrieval-Augmented Generation
+			</p>
+			<p class="normal0" style="line-height:115%; font-size:12pt">
+				&#xa0;
+			</p>
+			<p class="normal0" style="margin-left:36pt; text-indent:-18pt; line-height:normal; font-size:14pt">
+				<span>-</span><span style="width:13.34pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span>Job Bangayan, Jerry Gonzalez, Sean Huang, Vineeta Kumar, Tianyu Wang
+			</p>
+			<p class="normal0">
+				&#xa0;
+			</p>
+			<p class="normal0" style="margin-bottom:1pt; line-height:115%; font-size:12pt; background-color:#ffffff">
+				<strong><span style="font-family:'Times New Roman'; ">Abstract</span></strong><span style="font-family:'Times New Roman'"> </span>
+			</p>
+			<p class="normal0" style="margin-bottom:1pt; line-height:115%; font-size:12pt; background-color:#ffffff">
+				<span style="font-family:'Times New Roman'">&#xa0;</span>
+			</p>
+			<p class="normal0" style="margin-bottom:1pt; line-height:115%; font-size:12pt; background-color:#ffffff">
+				<span style="font-family:'Times New Roman'">*** </span>
+			</p>
+			<p class="normal0" style="margin-bottom:1pt; background-color:#ffffff">
+				<strong><span style="font-family:'Times New Roman'; ">&#xa0;</span></strong>
+			</p>
+			<p class="normal0" style="margin-bottom:1pt; line-height:115%; font-size:10pt; background-color:#ffffff">
+				<strong><span style="font-family:'Times New Roman'; ">&#xa0;</span></strong><strong><span style="font-family:'Times New Roman'; ">Introduction</span></strong>
+			</p>
+			<p class="normal0" style="margin-bottom:1pt; line-height:115%; font-size:10pt; background-color:#ffffff">
+				<strong><span style="font-family:'Times New Roman'; ">&#xa0;</span></strong>
+			</p>
+			<div style="margin-left:18pt; background-color:#ffffff">
+				<p class="normal0" style="margin-left:18pt; text-indent:-18pt; line-height:115%; font-size:14pt">
+					<strong><span style="font-family:Georgia; "><span style="font-weight:normal">-</span></strong></span><span style="width:12.76pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span><strong><span style="font-family:Georgia; ">Jeopardy itself:</span></strong>
+				</p>
+			</div>
+			<p class="normal0" style="margin-left:36pt; text-indent:-18pt; line-height:115%; font-size:12pt">
+				<span style="font-family:'Times New Roman'; font-size:10pt">-</span><span style="width:14.67pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span>Within the trivia world, no question-and-answer format is more pervasive and enduring than Jeopardy's. This project aims to develop a model that allows for the answering questions based on a model trained on previous Jeopardy questions (over 470,000 clues over close to 30 seasons) by way of contextual embeddings and retrieval tasks.
+			</p>
+			<p class="normal0" style="margin-left:36pt; text-indent:-18pt; line-height:115%; font-size:14pt">
+				<strong><span style="font-family:Georgia; "><span style="font-weight:normal">-</span></strong></span><span style="width:12.76pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span><strong><span style="font-family:Georgia; ">Information retrieval:</span></strong>
+			</p>
+			<p class="normal0" style="margin-left:36pt; text-indent:-18pt; line-height:115%; font-size:12pt">
+				<span>-</span><span style="width:14pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span>The implications of information retrieval are vast making. In fact, information retrieval is a core principle in natural language processing and this project helps the project team develop skills to become experts in this space. Being able to answer user queries is a foundational part of question answering systems. These skills can be practiced on a set using Jeopardy questions. 
+			</p>
+			<p class="normal0" style="margin-left:36pt; text-indent:-18pt; line-height:115%; font-size:12pt">
+				<span>-</span><span style="width:14pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span>We have not found any projects where a language model is trained on Jeopardy questions. (making this a compelling and impactful problem to solve, big opportunity)
+			</p>
+			<p class="normal0" style="margin-left:36pt; text-indent:-18pt; line-height:115%; font-size:12pt">
+				<span>-</span><span style="width:14pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span>We do not expect that results to be spectacular for all use cases. Therein lies some potential interesting analysis that can be performed by way of language and subject analysis.
+			</p>
+			<p class="normal0" style="margin-left:36pt; text-indent:-18pt; line-height:115%; font-size:12pt">
+				<span>-</span><span style="width:14pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span>Our JeopardyLLM offers an unparalleled experience for trivia enthusiasts and knowledge seekers by harnessing the power of advanced natural language processing.
+			</p>
+			<p class="normal0" style="margin-left:36pt; text-indent:-18pt; line-height:115%; font-size:12pt">
+				<span>-</span><span style="width:14pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span>JeopardyLLM is powered by cutting-edge NLP technology that ensures precise and accurate responses.
+			</p>
+			<p class="normal0" style="margin-left:36pt; text-indent:-18pt; line-height:115%; font-size:12pt">
+				<span>-</span><span style="width:14pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span>JeopardyLLM is category agnostic in that it handles questions from a wide range of topics and categories found in Jeopardy. However, it is expected to perform better on certain categories than others.
+			</p>
+			<p class="normal0" style="margin-left:36pt; text-indent:-18pt; line-height:115%; font-size:12pt">
+				<span>-</span><span style="width:14pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span>We want the user to have a fun experience by providing a simple and intuitive interface for submitting questions. This ensures that users can effortlessly engage with the platform and enjoy the experience.
+			</p>
+			<p class="normal0" style="margin-left:36pt; text-indent:-18pt; line-height:115%; font-size:12pt">
+				<span>-</span><span style="width:14pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span>We will optimize for real-time responsiveness where users receive answers promptly creating a dynamic experience. 
+			</p>
+			<p class="normal0" style="margin-left:36pt; text-indent:-18pt; line-height:115%; font-size:12pt">
+				<span>-</span><span style="width:14pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span>How to quantify impact, market opportunity: There may be some impact in the trivia world. We aim to create a website where trivia enthusiasts can experiment with questions for free and train themselves on trivia. Generalizability studies on non-Jeopardy questions may be performed and analyzed for accuracy.
+			</p>
+			<p class="normal0" style="margin-left:36pt; text-indent:-18pt; line-height:115%; font-size:12pt">
+				<span>-</span><span style="width:14pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span>Define the primary use case validated by this target user/customer: “Can I answer this question using solely information from older Jeopardy questions?”
+			</p>
+			<p class="normal0" style="line-height:115%; font-size:12pt">
+				&#xa0;
+			</p>
+			<p class="normal0" style="line-height:115%; font-size:12pt">
+				Background
+			</p>
+			<p class="normal0" style="margin-left:36pt; text-indent:-18pt; line-height:115%; font-size:12pt">
+				<span>-</span><span style="width:14pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span><span style="background-color:#ffffff">Market</span><strong><span style="background-color:#ffffff"> </span></strong><span style="background-color:#ffffff">Size: Jeopardy is a very popular game show, averaging 9.2 million total viewers across the 2021-2022 season. There are many more interested in trivia and similar games throughout the country and the world at large.</span>
+			</p>
+			<p class="normal0" style="margin-left:36pt; text-indent:-18pt; line-height:115%; font-size:12pt">
+				<span>-</span><span style="width:14pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span>We have not found any projects where a language model is trained on Jeopardy questions. 
+			</p>
+			<p class="normal0" style="margin-left:36pt; text-indent:-18pt; line-height:115%; font-size:12pt">
+				<span>-</span><span style="width:14pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span>Some assumptions we will make about the problem/opportunity: That trivia enthusiasts and other curious users will be interested in knowing whether a strength in trivia and fact information applies to knowledge and interests outside of trivia and towards answering more novel questions.
+			</p>
+			<p class="normal0" style="margin-left:36pt; text-indent:-18pt; line-height:115%; font-size:12pt">
+				<span>-</span><span style="width:14pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span>Target user/customer segments: Trivia enthusiasts, prospective game show contestants who want to consolidate their knowledge base, anybody who is curious. Assumption that 100% accuracy, that the users are merely curious. That users would structure questions in a way that is answerable.
+			</p>
+			<p class="normal0" style="margin-left:36pt; text-indent:-18pt; line-height:115%; font-size:12pt">
+				<span>-</span><span style="width:14pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span>Major players and main vendors in the space, existing solutions:<span style="background-color:#ffffff"> ChatGPT, other LLMs that can be fine-tuned to answer questions. Many of these LLMs may be found on Huggingface. Google Cloud AI, AWS, Rasa (table from project plan)</span>
+			</p>
+			<p class="normal0" style="margin-left:36pt; text-indent:-18pt; line-height:115%; font-size:12pt">
+				<span>-</span><span style="width:14pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span><span style="background-color:#ffffff">Answering Jeopardy-style questions using algorithms became especially popular when IBM Watson defeated co-game show legends Ken Jennings and Brad Rutter in 2013 via a simple stochastic model (Tesauro, 2013). </span>
+			</p>
+			<p class="normal0" style="margin-left:36pt; text-indent:-18pt; line-height:115%; font-size:12pt">
+				<span>-</span><span style="width:14pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span><span style="background-color:#ffffff">Some newer language transformer models, such as BARD and ChatGPT, perform this task with the accuracy of a human expert. Moreover, they demonstrate higher accuracy than Watson in doing so. (O’Leary, 2023)</span><span style="background-color:#ffffff">&#xa0; </span>
+			</p>
+			<p class="normal0" style="margin-left:36pt; text-indent:-18pt; line-height:115%; font-size:12pt">
+				<span>-</span><span style="width:14pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span><span style="background-color:#ffffff">Jeopardy questions can be challenging to parse, given the ambiguity within the questions. Practicing and gaining experience with answering questions is helpful for prospective contestants. In addition, some question topics are more popular than others (history over sports, for instance). Some studies explore trends while analyzing the questions themselves. </span>
+			</p>
+			<p class="normal0" style="margin-left:36pt; text-indent:-18pt; line-height:115%; font-size:12pt">
+				<span>-</span><span style="width:14pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span><span style="background-color:#ffffff">Similar question and answering tasks have used SQuAD as a context</span>
+			</p>
+			<p class="normal0" style="margin-right:3pt; margin-left:36pt; text-indent:-18pt; line-height:103%; font-size:12pt">
+				<span style="background-color:#ffffff"><span style="background-color:#ffffff">-</span></span><span style="width:14pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span><span style="background-color:#ffffff">Rajpurkar, P., Zhang, J., Lopyrev, K., &amp; Liang, P. (2016). Squad: 100,000+ questions for machine comprehension of text. </span><em><span style="background-color:#ffffff">arXiv preprint arXiv:1606.05250</span></em><span style="background-color:#ffffff">. </span>
+			</p>
+			<p class="normal0" style="margin-right:3pt; margin-left:36pt; text-indent:-18pt; line-height:103%; font-size:12pt">
+				<span style="background-color:#ffffff"><span style="background-color:#ffffff">-</span></span><span style="width:14pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span><span style="background-color:#ffffff">Labeling may be necessary if a dataset is ambiguous as Jeopardy’s dataset</span>
+			</p>
+			<p class="normal0" style="line-height:115%; font-size:12pt">
+				&#xa0;
+			</p>
+			<p class="normal0" style="line-height:115%; font-size:12pt">
+				Methods
+			</p>
+			<div style="margin-left:18pt; background-color:#ffffff">
+				<p class="normal0" style="margin-left:18pt; text-indent:-18pt; line-height:115%; font-size:14pt">
+					<span style="font-size:12pt">-</span><span style="width:14pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span><span style="line-height:115%; font-family:'Times New Roman'; font-size:11pt">Questions and answers are found on the Jeopardy Clue Dataset curated online</span><span style="line-height:115%; font-family:'Times New Roman'; font-size:9.33pt; "><sup>2</sup></span><span style="line-height:115%; font-family:'Times New Roman'; font-size:11pt"> by github user jwolle1 (</span><a href="https://github.com/jwolle1/jeopardy_clue_dataset" style="text-decoration:none"><u><span style="line-height:115%; font-family:'Times New Roman'; font-size:11pt; color:#0563c1">https://github.com/jwolle1/jeopardy_clue_dataset</span></u></a><span style="line-height:115%; font-family:'Times New Roman'; font-size:11pt">). The dataset contains 473,067 Jeopardy clues from Season 1 up to Season 39 which ended in July 2023. Notedly, the site states that it does not contain every clue that has appeared on the show and the data source preferred not to be credited. Each of the questions were uploaded for analysis. 50 different clues were generated using a random number generator. The number ’50’ was chosen because that it is number of questions on the Jeopardy Anytime test. In addition, creating contexts for questions from a large dataset can be time and resource heavy, and opting for 50 seemed clean.</span>
+				</p>
+			</div>
+			<div style="margin-left:18pt; background-color:#ffffff">
+				<p class="normal0" style="margin-left:18pt; text-indent:-18pt">
+					<span style="font-family:'Times New Roman'">-</span><span style="width:14.34pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span><span style="font-family:'Times New Roman'">Public dataset. Data is relatively clean already, questions and answers</span>
+				</p>
+			</div>
+			<p class="normal0" style="margin-left:36pt; text-indent:-18pt; line-height:115%; font-size:12pt">
+				<span>-</span><span style="width:14pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span>Website: Who will you contact to conduct initial user research and feedback? 
+			</p>
+			<p class="normal0" style="margin-left:36pt; text-indent:-18pt; line-height:115%; font-size:12pt">
+				<span>-</span><span style="width:14pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span>Regarding the user journey and UI/UX for this data product: The user merely needs to interact with the website. The homepage is clean and encouraging. They would not need to sign up or register. They simply need to type in questions. There will be instructions. Feedback will be in the form of short answers. The users themselves will be determined whether they are correct or not. There will be an area to solicit feedback.&#xa0; Payment is not expected.
+			</p>
+			<p class="normal0" style="margin-left:36pt; text-indent:-18pt; line-height:115%; font-size:12pt">
+				<span>-</span><span style="width:14pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span>Methodologies used for initial EDA - JSON file, via ChatGPT 4.0, look at categories, questions, and answers
+			</p>
+			<p class="normal0" style="margin-left:36pt; text-indent:-18pt; line-height:115%; font-size:12pt">
+				<span>-</span><span style="width:14pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span>Comparing Models from Huggingface Leaderboard
+			</p>
+			<p class="normal0" style="margin-left:36pt; text-indent:-18pt; line-height:115%; font-size:12pt">
+				<span>-</span><span style="width:14pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span>Retrieval Augmented Generation
+			</p>
+			<p class="normal0" style="margin-left:36pt; text-indent:-18pt; line-height:115%; font-size:12pt">
+				<span>-</span><span style="width:14pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span>We will evaluate the accuracy of the model’s responses by comparing them against the correct answers in the Jeopardy dataset.
+			</p>
+			<p class="normal0" style="margin-left:36pt; text-indent:-18pt; line-height:115%; font-size:12pt">
+				<span>-</span><span style="width:14pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span>Will collect user feedback regarding the relevance and correctness of the answers provided.
+			</p>
+			<p class="normal0" style="margin-left:36pt; text-indent:-18pt; line-height:115%; font-size:12pt">
+				<span>-</span><span style="width:14pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span>Will measure response time to ensure that user expectations are met for a quick and seamless experience.
+			</p>
+			<div style="margin-left:18pt; background-color:#ffffff">
+				<p class="normal0" style="margin-left:18pt; text-indent:-18pt">
+					<span style="font-size:12pt">-</span><span style="width:14pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span><span style="font-family:'Times New Roman'">Flan-T5 which has been trained on question-answer pairs and better follow directions. Flan-T5 can incorporate contexts. Results will be compared with an pretrained Flan-T5 as well.</span><span style="font-family:'Times New Roman'">&#xa0; </span>
+				</p>
+			</div>
+			<div style="margin-left:18pt; margin-bottom:1pt; background-color:#ffffff">
+				<p class="normal0" style="margin-left:18pt; text-indent:-18pt">
+					<span style="font-size:12pt">-</span><span style="width:14pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span><span style="font-family:'Times New Roman'; color:#343541">The results from Flan-T5 answering task will be compared to the correct answers. We will provide an exact match </span><u><span style="font-family:'Times New Roman'; color:#343541">in the Jeopardy vein</span></u><span style="font-family:'Times New Roman'; color:#343541"> meaning a few things, however similar to the game show, spelling does not matter unless a syllable is added. In addition, last names are sufficient for proper names. Any grammatically correct question with the correct answer within it counts as well. Each contestant will display their own individual match metric however we will also have an overall metric (where at least any one of the three contestants is correct – this is similar to the game show where only one needs to buzz in correctly for points to be awarded. However Jaccard similarities rely on exact matches, rather than nuanced matches by Jeopardy standards. </span>
+				</p>
+			</div>
+			<p class="normal0" style="line-height:115%; font-size:12pt">
+				&#xa0;
+			</p>
+			<p class="normal0" style="line-height:115%; font-size:12pt">
+				Results
+			</p>
+			<p class="normal0" style="margin-left:36pt; text-indent:-18pt; line-height:115%; font-size:12pt">
+				<span>-</span><span style="width:14pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span>The minimal viable product is a basic website that allows users to input a question and receive an answer that is obtained from a predefined set of Jeopardy questions. The goal is to test the fundamental assumptions about the ability of the language model to understand and respond appropriately to a range of Jeopardy-style questions. Main features - What are the main features and why? Will have a simple question interface where users can submit questions. Currently looking at using a text box. There will be a section to display the generated answer. Will need to integrate a Jeopardy dataset that contains a diverse set of Jeopardy questions and answers.
+			</p>
+			<p class="normal0" style="margin-left:36pt; text-indent:-18pt; line-height:115%; font-size:12pt">
+				<span>-</span><span style="width:14pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span>More about website: instructions, tip sheet for how to prompt engineer. There will be an area on the website to solicit feedback for continued improvements.
+			</p>
+			<p class="normal0" style="line-height:115%; font-size:12pt">
+				&#xa0;
+			</p>
+			<p class="normal0" style="line-height:115%; font-size:12pt">
+				Discussion
+			</p>
+			<p class="normal0" style="margin-left:36pt; text-indent:-18pt">
+				<span style="font-size:12pt">-</span><span style="width:14pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span>Our MVP demonstrates the ability to generate answers based <u>solely</u> on older Jeopardy questions. It is essentially a test to see whether an extensive trivia and Jeopardy base is enough to justify questions that are not from game shows. Existing solutions are expectedly much more powerful and draw on larger sources.
+			</p>
+			<p class="normal0" style="margin-left:36pt; text-indent:-18pt; line-height:115%; font-size:12pt">
+				<span>-</span><span style="width:14pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span>Improving the website, other potential improvements
+			</p>
+			<p class="normal0" style="margin-left:36pt; text-indent:-18pt; line-height:115%; font-size:12pt">
+				<span>-</span><span style="width:14pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span>Value delivered - The primary value is delivering a quick and accurate response to Jeopardy-style questions.&#xa0; Users will be able to challenge the system’s ability to comprehend and answer questions.
+			</p>
+			<p class="normal0" style="margin-bottom:1pt; background-color:#ffffff">
+				<span style="font-family:'Times New Roman'; color:#343541">&#xa0;</span>
+			</p>
+			<p class="normal0" style="margin-bottom:1pt; background-color:#ffffff">
+				<span style="font-family:'Times New Roman'; color:#343541">Conclusion</span>
+			</p>
+			<div style="margin-left:18pt; background-color:#ffffff">
+				<p class="normal0" style="margin-left:18pt; text-indent:-18pt">
+					<span style="font-family:'Times New Roman'; color:#343541">-</span><span style="width:14.34pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span><span style="font-family:'Times New Roman'; color:#343541">The project demonstrates </span><span style="font-family:'Times New Roman'">moderate success at answering newer Jeopardy questions using older ones. </span>
+				</p>
+			</div>
+			<div style="margin-left:18pt; margin-bottom:1pt; background-color:#ffffff">
+				<p class="normal0" style="margin-left:18pt; text-indent:-18pt">
+					<span style="font-family:'Times New Roman'; color:#343541">-</span><span style="width:14.34pt; font:7pt 'Times New Roman'; display:inline-block">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span><span style="font-family:'Times New Roman'">This project was performed as part of a MIDS capstone project.</span>
+				</p>
+			</div>
+			<p class="normal0" style="background-color:#ffffff">
+				&#xa0;
+			</p>
+			<p class="normal0" style="line-height:115%; font-size:10pt; background-color:#ffffff">
+				<span style="color:#222222">Chung, H. W., Hou, L., Longpre, S., Zoph, B., Tay, Y., Fedus, W., ... &amp; Wei, J. (2022). Scaling instruction-finetuned language models. </span><em><span style="color:#222222">arXiv preprint arXiv:2210.11416</span></em><span style="color:#222222">. </span>
+			</p>
+			<p class="normal0" style="background-color:#ffffff">
+				<span style="font-family:'Times New Roman'">&#xa0;</span>
+			</p>
+			<p class="normal0" style="background-color:#ffffff">
+				<span style="font-family:'Times New Roman'">Hamilton, B, "A Data Exploration of Jeopardy! from 1984 to the Present" (2020). </span><em><span style="font-family:'Times New Roman'; ">CUNY Academic Works.</span></em><a href="https://academicworks.cuny.edu/gc_etds/4049" style="text-decoration:none"><em><span style="font-family:'Times New Roman'; color:#000000">&#xa0;</span></em></a><a href="https://academicworks.cuny.edu/gc_etds/4049" style="text-decoration:none"><u><span style="font-family:'Times New Roman'; color:#0563c1">https://academicworks.cuny.edu/gc_etds/4049</span></u></a><span style="font-family:'Times New Roman'"> </span>
+			</p>
+			<p class="normal0" style="margin-left:36pt; background-color:#ffffff">
+				<span style="font-family:'Times New Roman'; color:#222222">  </span>
+			</p>
+			<p class="normal0" style="margin-bottom:1pt; background-color:#ffffff">
+				<span style="font-family:'Times New Roman'; color:#222222">O'Leary, D. (2023). An analysis of Watson vs. BARD vs. ChatGPT: The Jeopardy! Challenge. </span><em><span style="font-family:'Times New Roman'; color:#222222">AI Magazine</span></em><span style="font-family:'Times New Roman'; color:#222222">. </span>
+			</p>
+			<p class="normal0" style="background-color:#ffffff">
+				<span style="font-family:'Times New Roman'; color:#222222">&#xa0;</span>
+			</p>
+			<p class="normal0" style="line-height:115%; font-size:10pt; background-color:#ffffff">
+				<span style="color:#222222">Rajpurkar, P., Zhang, J., Lopyrev, K., &amp; Liang, P. (2016). Squad: 100,000+ questions for machine comprehension of text. </span><em><span style="color:#222222">arXiv preprint arXiv:1606.05250</span></em><span style="color:#222222">. </span>
+			</p>
+			<p class="normal0" style="background-color:#ffffff">
+				<span style="font-family:'Times New Roman'; color:#222222">&#xa0;</span>
+			</p>
+			<p class="normal0" style="background-color:#ffffff">
+				<span style="font-family:'Times New Roman'; color:#222222">Salo D. (2019, Dec) NLP Rules and Models for Jeopardy! Questions and Answers. Dan Salo’s Blog</span><a href="https://dancsalo.github.io/2019/12/29/jeopardy/" style="text-decoration:none"><u><span style="font-family:'Times New Roman'; color:#222222">&#xa0;</span></u></a><a href="https://dancsalo.github.io/2019/12/29/jeopardy/" style="text-decoration:none"><u><span style="font-family:'Times New Roman'; color:#0563c1">https://dancsalo.github.io/2019/12/29/jeopardy/</span></u></a><span style="font-family:'Times New Roman'; color:#0563c1"> </span>
+			</p>
+			<p class="normal0" style="background-color:#ffffff">
+				<span style="font-family:'Times New Roman'; color:#0563c1">&#xa0;</span>
+			</p>
+			<p class="normal0" style="line-height:115%; font-size:10pt; background-color:#ffffff">
+				<span style="color:#222222">Raffel, C., Shazeer, N., Roberts, A., Lee, K., Narang, S., Matena, M., ... &amp; Liu, P. J. (2020). Exploring the limits of transfer learning with a unified text-to-text transformer. </span><em><span style="color:#222222">The Journal of Machine Learning Research</span></em><span style="color:#222222">, </span><em><span style="color:#222222">21</span></em><span style="color:#222222">(1), 5485-5551. </span>
+			</p>
+			<p class="normal0" style="margin-left:36pt; background-color:#ffffff">
+				<span style="font-family:'Times New Roman'; color:#222222">   </span>
+			</p>
+			<p class="normal0" style="background-color:#ffffff">
+				<span style="font-family:'Times New Roman'; color:#222222">Tesauro, G., Gondek, D. C., Lenchner, J., Fan, J., &amp; Prager, J. M. (2013). Analysis of watson's strategies for playing Jeopardy!. </span><em><span style="font-family:'Times New Roman'; color:#222222">Journal of Artificial Intelligence Research</span></em><span style="font-family:'Times New Roman'; color:#222222">, </span><em><span style="font-family:'Times New Roman'; color:#222222">47</span></em><span style="font-family:'Times New Roman'; color:#222222">, 205-251. </span>
+			</p>
+			<p class="normal0" style="background-color:#ffffff">
+				<span style="font-family:'Times New Roman'; color:#222222">&#xa0;</span>
+			</p>
+			<p class="normal0" style="background-color:#ffffff">
+				<span style="font-family:'Times New Roman'; color:#222222">ToughData (2023, Aug) Finetuning Flan-T5 for Question Answering using Quora data. Toughdata. https://www.toughdata.net/blog/post/finetune-flan-t5-question-answer-quora-dataset </span>
+			</p>
+			<p class="normal0" style="background-color:#ffffff">
+				<span style="font-family:'Times New Roman'; color:#222222">  </span>
+			</p>
+			<p class="normal0" style="margin-bottom:1pt; background-color:#ffffff">
+				<span style="font-family:'Times New Roman'">&#xa0;</span>
+			</p>
+			<p class="normal0" style="line-height:115%; font-size:12pt; background-color:#ffffff">
+				<span style="font-family:'Times New Roman'">&#xa0;</span>
+			</p>
+			<p class="normal0" style="margin-bottom:1pt; line-height:115%; font-size:10pt; background-color:#ffffff">
+				<span style="font-family:'Times New Roman'">&#xa0;</span>
+			</p>
+			<p class="normal0" style="line-height:115%; font-size:10pt; background-color:#ffffff">
+				<span style="font-family:'Times New Roman'">&#xa0;</span>
+			</p>
+			<p class="normal0" style="margin-bottom:1pt; line-height:115%; font-size:12pt; background-color:#ffffff">
+				<span style="font-family:'Times New Roman'">&#xa0;</span>
+			</p>
+			<table style="width:209.25pt; border:0.75pt solid #000000; border-collapse:collapse">
+				<tr style="height:27pt">
+					<td style="border-right:0.75pt solid #000000; border-bottom:0.75pt solid #000000; vertical-align:top">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; line-height:115%; font-size:7.5pt">
+							<span style="font-family:'Times New Roman'">&#xa0;</span>
+						</p>
+					</td>
+					<td style="border-right:0.75pt solid #000000; border-left:0.75pt solid #000000; border-bottom:0.75pt solid #000000; vertical-align:top; background-color:#d9d9d9">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; text-align:center; line-height:115%; font-size:7.5pt">
+							<strong><span style="font-family:'Times New Roman'; ">POD</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; text-align:center; line-height:115%; font-size:7.5pt">
+							<strong><span style="font-family:'Times New Roman'; ">1</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+					<td style="border-right:0.75pt solid #000000; border-left:0.75pt solid #000000; border-bottom:0.75pt solid #000000; vertical-align:top; background-color:#d9d9d9">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; text-align:center; line-height:115%; font-size:7.5pt">
+							<strong><span style="font-family:'Times New Roman'; ">POD 2</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+					<td style="border-right:0.75pt solid #000000; border-left:0.75pt solid #000000; border-bottom:0.75pt solid #000000; vertical-align:top; background-color:#d9d9d9">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; text-align:center; line-height:115%; font-size:7.5pt">
+							<strong><span style="font-family:'Times New Roman'; ">POD 3</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+					<td style="border-left:0.75pt solid #000000; border-bottom:0.75pt solid #000000; vertical-align:top; background-color:#d9d9d9">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; text-align:center; line-height:115%; font-size:7.5pt">
+							<strong><span style="font-family:'Times New Roman'; ">POD 1-3</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+				</tr>
+				<tr style="height:33pt">
+					<td style="border-top:0.75pt solid #000000; border-right:0.75pt solid #000000; border-bottom:0.75pt solid #000000; vertical-align:top; background-color:#dae3f3">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; line-height:115%; font-size:8pt">
+							<strong><span style="font-family:'Times New Roman'; ">Geography</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+					<td style="border:0.75pt solid #000000; vertical-align:top; background-color:#dae3f3">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; text-align:center; line-height:115%; font-size:10pt">
+							<strong><span style="font-family:'Times New Roman'; ">0%</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+					<td style="border:0.75pt solid #000000; vertical-align:top; background-color:#dae3f3">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; text-align:center; line-height:115%; font-size:10pt">
+							<strong><span style="font-family:'Times New Roman'; ">30%</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+					<td style="border:0.75pt solid #000000; vertical-align:top; background-color:#dae3f3">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; text-align:center; line-height:115%; font-size:10pt">
+							<strong><span style="font-family:'Times New Roman'; ">50%</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+					<td style="border-top:0.75pt solid #000000; border-left:0.75pt solid #000000; border-bottom:0.75pt solid #000000; vertical-align:top; background-color:#dae3f3">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; text-align:center; line-height:115%; font-size:10pt">
+							<strong><span style="font-family:'Times New Roman'; ">60%</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+				</tr>
+				<tr style="height:33pt">
+					<td style="border-top:0.75pt solid #000000; border-right:0.75pt solid #000000; border-bottom:0.75pt solid #000000; vertical-align:top; background-color:#ff8ad8">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; line-height:115%; font-size:8pt">
+							<strong><span style="font-family:'Times New Roman'; ">Entertainment</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+					<td style="border:0.75pt solid #000000; vertical-align:top; background-color:#ff8ad8">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; text-align:center; line-height:115%; font-size:10pt">
+							<strong><span style="font-family:'Times New Roman'; ">0%</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+					<td style="border:0.75pt solid #000000; vertical-align:top; background-color:#ff8ad8">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; text-align:center; line-height:115%; font-size:10pt">
+							<strong><span style="font-family:'Times New Roman'; ">10%</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+					<td style="border:0.75pt solid #000000; vertical-align:top; background-color:#ff8ad8">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; text-align:center; line-height:115%; font-size:10pt">
+							<strong><span style="font-family:'Times New Roman'; ">20%</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+					<td style="border-top:0.75pt solid #000000; border-left:0.75pt solid #000000; border-bottom:0.75pt solid #000000; vertical-align:top; background-color:#ff8ad8">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; text-align:center; line-height:115%; font-size:10pt">
+							<strong><span style="font-family:'Times New Roman'; ">30%</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+				</tr>
+				<tr style="height:33pt">
+					<td style="border-top:0.75pt solid #000000; border-right:0.75pt solid #000000; border-bottom:0.75pt solid #000000; vertical-align:top; background-color:#ffff00">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; line-height:115%; font-size:8pt">
+							<strong><span style="font-family:'Times New Roman'; ">History</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+					<td style="border:0.75pt solid #000000; vertical-align:top; background-color:#ffff00">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; text-align:center; line-height:115%; font-size:10pt">
+							<strong><span style="font-family:'Times New Roman'; ">10%</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+					<td style="border:0.75pt solid #000000; vertical-align:top; background-color:#ffff00">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; text-align:center; line-height:115%; font-size:10pt">
+							<strong><span style="font-family:'Times New Roman'; ">10%</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+					<td style="border:0.75pt solid #000000; vertical-align:top; background-color:#ffff00">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; text-align:center; line-height:115%; font-size:10pt">
+							<strong><span style="font-family:'Times New Roman'; ">40%</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+					<td style="border-top:0.75pt solid #000000; border-left:0.75pt solid #000000; border-bottom:0.75pt solid #000000; vertical-align:top; background-color:#ffff00">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; text-align:center; line-height:115%; font-size:10pt">
+							<strong><span style="font-family:'Times New Roman'; ">50%</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+				</tr>
+				<tr style="height:33pt">
+					<td style="border-top:0.75pt solid #000000; border-right:0.75pt solid #000000; border-bottom:0.75pt solid #000000; vertical-align:top; background-color:#d883ff">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; line-height:115%; font-size:8pt">
+							<strong><span style="font-family:'Times New Roman'; ">Arts and Literature</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+					<td style="border:0.75pt solid #000000; vertical-align:top; background-color:#d883ff">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; text-align:center; line-height:115%; font-size:10pt">
+							<strong><span style="font-family:'Times New Roman'; ">10%</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+					<td style="border:0.75pt solid #000000; vertical-align:top; background-color:#d883ff">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; text-align:center; line-height:115%; font-size:10pt">
+							<strong><span style="font-family:'Times New Roman'; ">30%</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+					<td style="border:0.75pt solid #000000; vertical-align:top; background-color:#d883ff">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; text-align:center; line-height:115%; font-size:10pt">
+							<strong><span style="font-family:'Times New Roman'; ">40%</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+					<td style="border-top:0.75pt solid #000000; border-left:0.75pt solid #000000; border-bottom:0.75pt solid #000000; vertical-align:top; background-color:#d883ff">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; text-align:center; line-height:115%; font-size:10pt">
+							<strong><span style="font-family:'Times New Roman'; ">50%</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+				</tr>
+				<tr style="height:33pt">
+					<td style="border-top:0.75pt solid #000000; border-right:0.75pt solid #000000; border-bottom:0.75pt solid #000000; vertical-align:top; background-color:#a9d18e">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; line-height:115%; font-size:8pt">
+							<strong><span style="font-family:'Times New Roman'; ">Science and Nature</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+					<td style="border:0.75pt solid #000000; vertical-align:top; background-color:#a9d18e">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; text-align:center; line-height:115%; font-size:10pt">
+							<strong><span style="font-family:'Times New Roman'; ">10%</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+					<td style="border:0.75pt solid #000000; vertical-align:top; background-color:#a9d18e">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; text-align:center; line-height:115%; font-size:10pt">
+							<strong><span style="font-family:'Times New Roman'; ">0%</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+					<td style="border:0.75pt solid #000000; vertical-align:top; background-color:#a9d18e">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; text-align:center; line-height:115%; font-size:10pt">
+							<strong><span style="font-family:'Times New Roman'; ">20%</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+					<td style="border-top:0.75pt solid #000000; border-left:0.75pt solid #000000; border-bottom:0.75pt solid #000000; vertical-align:top; background-color:#a9d18e">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; text-align:center; line-height:115%; font-size:10pt">
+							<strong><span style="font-family:'Times New Roman'; ">20%</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+				</tr>
+				<tr style="height:33pt">
+					<td style="border-top:0.75pt solid #000000; border-right:0.75pt solid #000000; border-bottom:0.75pt solid #000000; vertical-align:top; background-color:#ffc000">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; line-height:115%; font-size:8pt">
+							<strong><span style="font-family:'Times New Roman'; ">Sports and Leisure</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+					<td style="border:0.75pt solid #000000; vertical-align:top; background-color:#ffc000">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; text-align:center; line-height:115%; font-size:10pt">
+							<strong><span style="font-family:'Times New Roman'; ">0%</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+					<td style="border:0.75pt solid #000000; vertical-align:top; background-color:#ffc000">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; text-align:center; line-height:115%; font-size:10pt">
+							<strong><span style="font-family:'Times New Roman'; ">10%</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+					<td style="border:0.75pt solid #000000; vertical-align:top; background-color:#ffc000">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; text-align:center; line-height:115%; font-size:10pt">
+							<strong><span style="font-family:'Times New Roman'; ">40%</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+					<td style="border-top:0.75pt solid #000000; border-left:0.75pt solid #000000; border-bottom:0.75pt solid #000000; vertical-align:top; background-color:#ffc000">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; text-align:center; line-height:115%; font-size:10pt">
+							<strong><span style="font-family:'Times New Roman'; ">40%</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+				</tr>
+				<tr style="height:33pt">
+					<td style="border-top:0.75pt solid #000000; border-right:0.75pt solid #000000; vertical-align:top; background-color:#d9d9d9">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; line-height:115%; font-size:8pt">
+							<strong><span style="font-family:'Times New Roman'; ">Total</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+					<td style="border-top:0.75pt solid #000000; border-right:0.75pt solid #000000; border-left:0.75pt solid #000000; vertical-align:top; background-color:#d9d9d9">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; text-align:center; line-height:115%; font-size:10pt">
+							<strong><span style="font-family:'Times New Roman'; ">5%</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+					<td style="border-top:0.75pt solid #000000; border-right:0.75pt solid #000000; border-left:0.75pt solid #000000; vertical-align:top; background-color:#d9d9d9">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; text-align:center; line-height:115%; font-size:10pt">
+							<strong><span style="font-family:'Times New Roman'; ">15%</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+					<td style="border-top:0.75pt solid #000000; border-right:0.75pt solid #000000; border-left:0.75pt solid #000000; vertical-align:top; background-color:#d9d9d9">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; text-align:center; line-height:115%; font-size:10pt">
+							<strong><span style="font-family:'Times New Roman'; ">35%</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+					<td style="border-top:0.75pt solid #000000; border-left:0.75pt solid #000000; vertical-align:top; background-color:#d9d9d9">
+						<p class="normal0" style="margin-top:2pt; margin-bottom:3pt; text-align:center; line-height:115%; font-size:10pt">
+							<strong><span style="font-family:'Times New Roman'; ">42%</span></strong><span style="font-family:'Times New Roman'"> </span>
+						</p>
+					</td>
+				</tr>
+			</table>
+			<p class="normal0" style="margin-bottom:1pt; background-color:#ffffff">
+				<span style="font-family:'Times New Roman'">&#xa0;</span>
+			</p>
+			<p class="normal0" style="margin-bottom:1pt; line-height:115%; font-size:10pt; background-color:#ffffff">
+				<span style="font-family:'Times New Roman'">&#xa0;</span>
+			</p>
+			<p class="normal0" style="margin-bottom:1pt; line-height:115%; font-size:10pt; background-color:#ffffff">
+				<span style="font-family:'Times New Roman'">&#xa0;</span>
+			</p>
+			<p class="normal0">
+				&#xa0;
+			</p>
+		</div>
+	<p style="bottom: 10px; right: 10px; position: absolute;"><a href="https://wordtohtml.net" target="_blank" style="font-size:11px; color: #d0d0d0">Converted to HTML with WordToHTML.net</a></p>
+
+	<script src="jquery-3.7.1.min.js"></script>
+    <script src="bootstrap-4.5.3-dist/js/bootstrap.min.js"></script>
+</body>
+</html>
