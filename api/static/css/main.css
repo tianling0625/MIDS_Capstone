@@ -4,7 +4,10 @@ body {
     background: #FFFFFF;
 }
 .navbar {
+    z-index: 1050;
     background: #156082;
+    position: relative;
+    width: 100%;
 }
 .nav-link,
 .navbar-brand {
@@ -153,6 +156,11 @@ body {
     height: 150px; /* Adjust the height as needed */
     object-fit: cover; /* Ensures the image covers the area without stretching */
     border-radius: 50%; /* Keeps the image round */
+}
+
+.container.my-3 {
+    z-index: 1050;
+    position: relative; /* Adjust based on your layout */
 }
 
 /* Responsive adjustments for smaller screens */
