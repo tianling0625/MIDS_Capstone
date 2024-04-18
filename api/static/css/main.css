@@ -163,6 +163,17 @@ body {
     position: relative; /* Adjust based on your layout */
 }
 
+.btn-secondary {
+    background-color: #156082; /* Set the background color */
+    border-color: #156082; /* Set the border color to match the background */
+    color: #fff; /* Set the text color to white for contrast */
+}
+
+.btn-secondary:hover {
+    background-color: #0e4c6a; /* Darker shade for hover state */
+    border-color: #0e4c6a; /* Border color matches the hover background */
+}
+
 /* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
     .description-title {
